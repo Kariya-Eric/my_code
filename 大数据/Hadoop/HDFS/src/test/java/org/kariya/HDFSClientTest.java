@@ -51,12 +51,12 @@ public class HDFSClientTest {
         }
     }
     
-    @Test
-    public void download() throws IOException {
-        Path source = new Path("/source/weibo/comment_log/20190810_kariya001/caixukun.csv");
-        Path target = new Path("D:\\data\\caixukun.csv");
-        fs.copyToLocalFile(source, target);
-    }
+    //@Test
+    //public void download() throws IOException {
+    //    Path source = new Path("/source/weibo/comment_log/20190810_kariya001/caixukun.csv");
+    //    Path target = new Path("D:\\data\\caixukun.csv");
+    //    fs.copyToLocalFile(source, target);
+    //}
     
     @Test
     public void upload() throws IOException {
