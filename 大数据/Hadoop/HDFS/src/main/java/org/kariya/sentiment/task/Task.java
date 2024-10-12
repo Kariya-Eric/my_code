@@ -21,19 +21,21 @@ import java.util.Date;
 @Slf4j
 public class Task {
     private HDFSManager hdfsManager;
-    public Task() {
-        hdfsManager = new HDFSManagerImpl();
+    
+    public Task(boolean local) {
+        hdfsManager = new HDFSManagerImpl(local);
     }
     
     public void getTask(SentimentOptions options) {
         //判断原始数据目录是否存在
         File sourceFile = new File(options.getSourceDir());
+        log.info("上传源文件路径，{}", options.getSourceDir());
         if (!sourceFile.exists()) {
             log.error("{} 要采集的原始数据目录不存在.", options.getSourceDir());
             throw new RuntimeException(options.getSourceDir() + " 要采集的原始数据目录不存在.");
         }
         //读取原始数据目录下的所有文件
-        File[] all = sourceFile.listFiles(f -> f.getName().startsWith("weibo_data_"));
+        File[] all = sourceFile.listFiles(f -> f.getName().startsWith("caixukun"));
         //判断待上传是否存在
         File tempDir = new File(options.getPendingDir());
         if (!tempDir.exists()) {
@@ -88,14 +90,13 @@ public class Task {
             File copyTaskFile = new File(f.getAbsoluteFile() + "_COPY");
             try {
                 FileUtils.moveFile(f, copyTaskFile);
-                String taskDate = f.getName().split("_")[0];
+                String taskDate = f.getName().split("_")[1];
                 String hdfsPath = options.getOutput() + String.format("/%s", taskDate);
                 //判断目录是否存在，不存在则创建
                 hdfsManager.mkdir(hdfsPath);
+                log.info("上传文件目标路径，{}", hdfsPath);
                 String tasks = FileUtils.readFileToString(copyTaskFile, StandardCharsets.UTF_8);
-                Arrays.stream(tasks.split("\n")).forEach(task -> {
-                    hdfsManager.put(task, hdfsPath);
-                });
+                Arrays.stream(tasks.split("\n")).forEach(task -> hdfsManager.put(task, hdfsPath));
                 //上传成功
                 File doneFile = new File(f.getAbsoluteFile() + "_DONE");
                 FileUtils.moveFile(copyTaskFile, doneFile);

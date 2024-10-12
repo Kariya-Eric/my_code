@@ -23,7 +23,10 @@ public class Entrance {
             printUsage(parser);
             return;
         }
-        Task task = new Task();
+        //本地文件系统方式
+        //Task task = new Task(true);
+        //HDFS文件系统方式
+        Task task = new Task(false);
         log.info("舆情上报程序启动...");
         task.getTask(options);
         log.info("正在上传数据到HDFS...");

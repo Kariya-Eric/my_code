@@ -21,9 +21,14 @@ import java.util.List;
 public class HDFSManagerImpl implements HDFSManager {
     private Configuration conf;
     private FileSystem fs;
-    public HDFSManagerImpl() {
+    
+    public HDFSManagerImpl(boolean local) {
+        System.setProperty("HADOOP_USER_NAME", "root");
         try {
             conf = new Configuration();
+            if (!local) {
+                conf.set("fs.defaultFS", "hdfs://192.168.232.101:8020");
+            }
             fs = FileSystem.get(conf);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
