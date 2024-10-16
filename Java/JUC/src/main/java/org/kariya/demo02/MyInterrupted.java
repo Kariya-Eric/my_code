@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class MyInterrupted {
     
     public static void main(String[] args) throws InterruptedException {
-        demo02();
+        demo03();
     }
     
     public static void demo01() throws InterruptedException {
@@ -55,4 +55,31 @@ public class MyInterrupted {
         log.debug("interrupt");
         t1.interrupt();
     }
+    
+    //两阶段中止模式,t1线程优雅中止t2线程
+    public static void demo03() throws InterruptedException {
+        //均不推荐
+        //thread stop 停止线程
+        //System.exit 中止进程
+        Thread monitor = new Thread(() -> {
+            while (true) {
+                if (Thread.currentThread().isInterrupted()) {
+                    log.info("一些善后工作");
+                    break;
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                    log.info("monitor ------> ");
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "monitor");
+        monitor.start();
+        TimeUnit.SECONDS.sleep(6);
+        log.info("主线程休眠5s后中止monitor");
+        monitor.interrupt();
+    }
+    
 }
