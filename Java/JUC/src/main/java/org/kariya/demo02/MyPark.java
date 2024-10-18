@@ -32,7 +32,7 @@ public class MyPark {
             log.info("unpark...");
         }, "t1");
         t1.start();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(3);
         t1.interrupt();
     }
 }
