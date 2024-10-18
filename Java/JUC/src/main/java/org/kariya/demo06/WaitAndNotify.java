@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class WaitAndNotify {
     
     public static void main(String[] args) throws InterruptedException {
-        demo03();
+        demo04();
     }
     
     private static Object LOCK = new Object();
@@ -82,7 +82,41 @@ public class WaitAndNotify {
                 throw new RuntimeException(e);
             }
             go.set("Hello World");
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            log.info("继续执行后续代码。。");
         }, "t2").start();
+    }
+    
+    static int x = 0;
+    
+    public static void demo04() {
+        Thread t2 = new Thread(() -> {
+            log.info("变量修改...");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            x = 10;
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }, "t2");
+        new Thread(() -> {
+            try {
+                t2.join();
+                log.info("获取到值 ----> {}", x);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }, "t1").start();
+        t2.start();
     }
 }
 
