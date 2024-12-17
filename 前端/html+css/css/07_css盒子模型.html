@@ -5,15 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>盒子模型</title>
     <style>
+      table,
+      th,
+      td {
+        border: 1px solid pink;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      th,
+      td {
+        width: 80px;
+      }
       div {
         width: 200px;
         height: 200px;
-        border: 1px solid blue;
-        border-top-color: red;
+        padding: 10px;
+        border: 1px solid;
       }
     </style>
   </head>
   <body>
+    <table>
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>性别</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>张三</td>
+          <td>18</td>
+          <td>男</td>
+        </tr>
+        <tr>
+          <td>李四</td>
+          <td>19</td>
+          <td>男</td>
+        </tr>
+        <tr>
+          <td>王五</td>
+          <td>17</td>
+          <td>女</td>
+        </tr>
+      </tbody>
+    </table>
+
     <div></div>
   </body>
 </html>
