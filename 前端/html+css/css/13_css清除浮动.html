@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>清除浮动</title>
+    <style>
+      /* 父盒子不方便给高度时，当子元素浮动时会没有高度 */
+      .parent {
+        border: 1px solid;
+        /* 无法显示溢出的部分 */
+        overflow: auto;
+      }
+      /* 伪元素默认为行内元素 */
+      /* .parent:after {
+        content: "";
+        clear: both;
+        display: block;
+        visibility: hidden;
+        height: 0;
+      } */
+      .inner1 {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        float: left;
+      }
+      .inner2 {
+        float: left;
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+      }
+      .clear {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="inner1"></div>
+      <div class="inner2"></div>
+      <!-- 额外标签法，必须是块级元素 -->
+      <!-- <div class="clear"></div> -->
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浮动</title>
+    <!-- 多个块元素纵向排列为标准流 -->
+    <!-- 多个块元素横向排列使用浮动 -->
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      ul {
+        list-style: none;
+      }
+      .parent {
+        width: 1226px;
+        height: 285px;
+        background-color: pink;
+        margin: auto;
+      }
+      .box {
+        width: 296px;
+        height: 285px;
+        background-color: aqua;
+        float: left;
+        margin-right: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 标准流父元素 -->
+    <ul class="parent">
+      <li class="box"></li>
+      <li class="box"></li>
+      <li class="box"></li>
+      <li class="box" style="margin-right: 0"></li>
+    </ul>
+  </body>
+</html>

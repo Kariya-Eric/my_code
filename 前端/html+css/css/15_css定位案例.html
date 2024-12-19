@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css定位案例</title>
+    <style>
+      .outer {
+        position: relative;
+        width: 180px;
+        height: 300px;
+        border: 1px solid;
+      }
+      .img {
+        height: 180px;
+        background-color: pink;
+      }
+      .content {
+        padding: 12px;
+        font-size: 16px;
+        letter-spacing: 0.2px;
+        color: #a3a3a3;
+      }
+      .label {
+        position: absolute;
+        width: 48px;
+        height: 20px;
+        background-color: yellow;
+        top: 3%;
+        left: 85%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <div class="label"></div>
+      <div class="img"></div>
+      <div class="content">something....</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css定位</title>
+    <style>
+      .box {
+        /* 绝对定位没有父元素或者父元素没有定位则偏移根据body偏移 */
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border: 1px solid;
+        top: 50px;
+        left: 50px;
+        background-color: pink;
+      }
+      /* 绝对定位不占据位置，相对定位会保留位置 */
+      .son {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 50px;
+        left: 50px;
+        background-color: aqua;
+      }
+      .inner {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: 10px;
+        left: 10px;
+        background-color: gold;
+      }
+      .other {
+        width: 100px;
+        height: 100px;
+        border: 1px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="son">
+        <div class="inner"></div>
+      </div>
+      <div style="width: 20px; height: 20px; border: 1px solid"></div>
+    </div>
+    <div class="other"></div>
+  </body>
+</html>
